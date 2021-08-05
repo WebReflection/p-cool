@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="module">
+  import {define} from '../poly.js';
+  define('test', {
+    attachedCallback({textContent}) {
+      console.log('No name clashing for', textContent);
+    }
+  });
+  define('test', {
+    observedAttributes: ['test'],
+    attributeChangedCallback({textContent}, name, oldValue, newValue) {
+      console.log('test: attributeChangedCallback', textContent, name, oldValue, newValue);
+    },
+    attachedCallback(element) {
+      console.log('test: attachedCallback', element.textContent);
+    },
+    detachedCallback({textContent}) {
+      console.log('test: detachedCallback', textContent);
+    },
+    connectedCallback({textContent}) {
+      console.log('test: connectedCallback', textContent);
+    },
+    disconnectedCallback({textContent}) {
+      console.log('test: disconnectedCallback', textContent);
+    },
+  });
+  define('more', {
+    observedAttributes: ['test', 'more'],
+    attributeChangedCallback({textContent}, name, oldValue, newValue) {
+      console.log('more: attributeChangedCallback', textContent, name, oldValue, newValue);
+    },
+    attachedCallback({textContent}) {
+      console.log('more: attachedCallback', textContent);
+    },
+    detachedCallback({textContent}) {
+      console.log('more: detachedCallback', textContent);
+    },
+    connectedCallback({textContent}) {
+      console.log('more: connectedCallback', textContent);
+    },
+    disconnectedCallback({textContent}) {
+      console.log('more: disconnectedCallback', textContent);
+    },
+  });
+  const third = document.createElement('div', {is: 'p-cool-div'});
+  third.textContent = 'Third';
+  third.setAttribute('test', 'third-test');
+  third.setAttribute('more', 'third-more');
+  third.classList.add('more', 'test');
+  document.body.appendChild(third);
+  </script>
+</head>
+<body>
+  <p-cool class="test" test="zero">Zero</p-cool>
+  <div is="p-cool-div" class="test">First</div>
+  <p is="p-cool-p" test="123" more="456">Second</p>
+</body>
+</html>
