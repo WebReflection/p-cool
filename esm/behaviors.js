@@ -14,9 +14,8 @@ function* $(target, list) {
   const {behaviors, classList} = details.get(target);
   for (const name of (list || classList)) {
     if (names.has(name)) {
-      for (const behavior of names.get(name)) {
+      for (const behavior of names.get(name))
         yield [behaviors, behavior];
-      }
     }
   }
 }

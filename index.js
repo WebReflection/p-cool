@@ -103,7 +103,7 @@
  */
 
 const ELEMENT = 'Element';
-const NAME = Symbol('extends');
+const EXTENDS = Symbol('extends');
 
 const HTMLSpecial = {
   Anchor: 'A',
@@ -141,8 +141,8 @@ const names$1 = new WeakMap;
  */
 const $$1 = (name, Class) => {
   const args = [name, Class];
-  if (NAME in Class)
-    args.push({extends: Class[NAME].toLowerCase()});
+  if (EXTENDS in Class)
+    args.push({extends: Class[EXTENDS].toLowerCase()});
   $define.apply(customElements, args);
   names$1.set(Class, name);
   return Class;
@@ -157,7 +157,7 @@ const $$1 = (name, Class) => {
  */
 const define$2 = (name, Class) => Class ?
   $$1(name, Class) :
-  (Class) => $$1(name, Class);
+  Class => $$1(name, Class);
 
 /** @type {HTML} */
 const HTML = {};
@@ -172,7 +172,7 @@ Object.getOwnPropertyNames(self).forEach(name => {
         Tag === ELEMENT ?
           class extends Native {} :
           class extends Native {
-            static get [NAME]() { return Tag; }
+            static get [EXTENDS]() { return Tag; }
             constructor() {
               // @see https://github.com/whatwg/html/issues/5782
               if (!super().hasAttribute('is'))
@@ -200,9 +200,8 @@ function* $(target, list) {
   const {behaviors, classList} = details.get(target);
   for (const name of (list || classList)) {
     if (names.has(name)) {
-      for (const behavior of names.get(name)) {
+      for (const behavior of names.get(name))
         yield [behaviors, behavior];
-      }
     }
   }
 }
@@ -323,17 +322,12 @@ const notify = (target, method, connect) => {
 const classes = new Set;
 for (const key in HTML) {
   const Class = HTML[key];
-  const tag = Object.getOwnPropertySymbols(Class).filter(
-    ({description}) => description === 'extends'
-  );
   let name = 'p-cool';
-  if (tag.length)
-    name += '-' + Class[tag[0]].toLowerCase();
+  if (EXTENDS in Class)
+    name += '-' + Class[EXTENDS].toLowerCase();
   if (!classes.has(name)) {
     classes.add(name);
-    try {
-      define$2(name, behaviors(Class));
-    }
+    try { define$2(name, behaviors(Class)); }
     catch (o_O) {}
   }
 }

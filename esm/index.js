@@ -1,20 +1,15 @@
-import {define as $define, HTML} from 'vanilla-elements';
+import {define as $define, EXTENDS, HTML} from 'vanilla-elements';
 import {define as _define, behaviors, ATTRIBUTE_CHANGED_CALLBACK} from './behaviors.js';
 
 const classes = new Set;
 for (const key in HTML) {
   const Class = HTML[key];
-  const tag = Object.getOwnPropertySymbols(Class).filter(
-    ({description}) => description === 'extends'
-  );
   let name = 'p-cool';
-  if (tag.length)
-    name += '-' + Class[tag[0]].toLowerCase();
+  if (EXTENDS in Class)
+    name += '-' + Class[EXTENDS].toLowerCase();
   if (!classes.has(name)) {
     classes.add(name);
-    try {
-      $define(name, behaviors(Class));
-    }
+    try { $define(name, behaviors(Class)); }
     catch (o_O) {}
   }
 }
