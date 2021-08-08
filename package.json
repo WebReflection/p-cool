@@ -1,6 +1,6 @@
 {
   "name": "p-cool",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "This module is a follow up of [this Medium post](https://webreflection.medium.com/about-web-components-cc3e8b4035b0).",
   "scripts": {
     "build": "npm run rollup && node copy.js && npm run size",
