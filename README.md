@@ -5,6 +5,22 @@
 
 This module is a follow up of [this Medium post](https://webreflection.medium.com/about-web-components-cc3e8b4035b0), and it provides element mixins/behaviors, through class names, without names clashing.
 
+
+### Features
+
+  * it addresses every single point touched in the Medium's post:
+    * no name clashing
+    * multiple mixins/behaviors attached/detached at any time
+    * native Custom Elements builtin callbacks, associated to mixins/behaviors
+  * it's **S**erver **S**ide **R**endering compatible out of the box
+  * it uses all the DOM primitives without needing an extra attribute
+  * it's semantically bound with element's view (their classes and their dedicated style)
+  * it's graceful enchancement out of the box, based on builtin extends
+  * it provides a robust polyfilled version through [vanilla-elements](https://github.com/WebReflection/vanilla-elements#readme)
+
+
+#### Example
+
 ```js
 import {define} from 'p-cool';
 
@@ -187,3 +203,8 @@ This module offers the following exports:
   * `p-cool/behaviors` with the internally used `define` and `behaviors` exports, plus constants, useful to potentially create other libraries or utilities on top of the same logic
 
 The `https://unpkg.com/p-cool` points at the minified `/poly` variant, useful to quickly test, or develop, with this module.
+
+
+## Compatibility
+
+Every ES2015+ compatible browser out of the box, including Safari/WebKit based browsers in the *poly* version.
