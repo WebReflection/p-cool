@@ -50,7 +50,7 @@ Please note that if a mixin/behavior is detached, and then re-attached, this cal
 
 If any `observedAttributes` is specified, or if there is an `attributeChangedCallback`, this is invoked every time observed attributes change.
 
-Like it is for *Custom Elements*, this callback is invoked, after a mixin/behavior is attached, *before* `connectedCallback`, and *after* `attributeChangedCallback`.
+Like it is for *Custom Elements*, this callback is invoked, after a mixin/behavior is attached, hence *after* `attachedCallback`, but *before* `connectedCallback`.
 
 This callback is also invoked during the element lifecycle, whenever observed attributes change, providing the `oldValue` and the `newValue`.
 
@@ -63,9 +63,9 @@ Both values are `null` if there was not attribute, or if the attribute got remov
   <summary><strong>connectedCallback</strong></summary>
   <div>
 
-This callback is granted to be *after* an element gets a new mixin/behavior, and every single time the element gets moved or re-appended on the DOM, exactly like it is for native *Custom Elements*.
+This callback is granted to be invoked *after* an element gets a new mixin/behavior, and every other time the element gets moved or re-appended on the DOM, exactly like it is for native *Custom Elements*.
 
-If there are observed attributes, this callback is invoked *after* `attributeChangedCallback`.
+Please not that when a mixin/behavior is attached, and there are observed attributes, this callback will be invoked *after* `attributeChangedCallback`.
 
   </div>
 </details>
@@ -74,9 +74,9 @@ If there are observed attributes, this callback is invoked *after* `attributeCha
   <summary><strong>disconnectedCallback</strong></summary>
   <div>
 
-This callback is granted to be invoked when an element gets removed from the DOM, and it would never trigger if the `connectedCallback` didn't trigger already.
+This callback is granted to be invoked when an element gets removed from the DOM, and it would never trigger if the `connectedCallback` didn't happen already.
 
-Both callbacks are the ideal place to attach, on *connected*, and remove, on *disconnected*, timers, animations, or idle related callbacks, as even when elements get trached, both callbacks are granted to be executed.
+Both callbacks are the ideal place to attach, on *connected*, and remove, on *disconnected*, timers, animations, or idle related callbacks, as even when elements get trashed, both callbacks are granted to be executed, and in the right order of events.
 
   </div>
 </details>
