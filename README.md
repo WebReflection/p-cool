@@ -5,7 +5,7 @@ This module is a follow up of [this Medium post](https://webreflection.medium.co
 ```js
 import {define} from 'p-cool';
 
-define('some-behavior', {
+define('my-div', {
 
   // to know when a behavior is attached or detached via class
   attachedCallback(element) {},
@@ -24,10 +24,66 @@ define('some-behavior', {
 ```
 
 ```html
-<div is="p-cool-div" class="some-behavior" some-attribute="ok">
+<div is="p-cool-div" class="my-div" some-attribute="ok">
   Hello Behaviors 👋
 </div>
 ```
+
+## About PCool
+
+With native Custom Elements, we need to reserve a single name in a shared global registry to pass through the upgrade, and callbacks, mechanism.
+
+With `p-cool` elements, the registry is pre-populated with [vanilla-elements](https://github.com/WebReflection/vanilla-elements#readme) extends through a `p-cool-*` prefix, so that `<div is="p-cool-div">`, and `<p is="p-cool-p">`, or `<main is="p-cool-main">` are all valide, already registered, builtin extends, that brings mixins/behaviors to any element, and through their class name, as long as one, or mixin, is defined/attached, through the `define(name, mixin)` module's export.
+
+```html
+<!doctype html>
+<script type="module">
+import {define} from '//unpkg.com/p-cool';
+
+import Hero from './mixins/hero.js';
+define('hero', Hero);
+
+import Bottom from './mixins/bottom.js';
+import AutoHide from './mixins/auto-hide.js';
+define('bottom', Bottom);
+define('auto-hide', AutoHide);
+</script>
+<style>
+main { /* ... */ }
+.hero { /* ... */ }
+.bottom { /* ... */ }
+</style>
+<body is="p-cool-body" class="hero">
+  <main>Hero</main>
+  <footer is="p-cool-footer" class="bottom auto-hide">
+    ...
+  </footer>
+</body>
+```
+
+To implement an *element extend*, the `<p-cool>` *Custom Element* is registered too, so that a page could be defined by non-builtin extends, with mixins/behaviors attached when, and if, needed.
+
+```html
+<!doctype html>
+<script type="module">
+import {define} from '//unpkg.com/p-cool';
+
+import Hero from './mixins/hero.js';
+define('hero', Hero);
+
+import Bottom from './mixins/bottom.js';
+import AutoHide from './mixins/auto-hide.js';
+define('bottom', Bottom);
+define('auto-hide', AutoHide);
+</script>
+<body>
+  <p-cool class="hero"></p-cool>
+  <p-cool class="bottom auto-hide">
+    ...
+  </p-cool>
+</body>
+```
+
 
 ## About Callbacks
 
