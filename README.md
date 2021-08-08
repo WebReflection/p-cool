@@ -198,7 +198,7 @@ second.classList.remove('mixin');
 This module offers the following exports:
 
   * `p-cool` with a `define(name, mixin)` export that *does not polyfill Safari*
-  * `p-cool/min` with a minified `define(name, mixin)` export that *does polyfill Safari*
+  * `p-cool/min` with a minified `define(name, mixin)` export that *does not polyfill Safari*
   * `p-cool/poly` with a minified `define(name, mixin)` export that also *does polyfill Safari*
   * `p-cool/behaviors` with the internally used `define` and `behaviors` exports, plus constants, useful to potentially create other libraries or utilities on top of the same logic
 
