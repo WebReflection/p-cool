@@ -1,5 +1,8 @@
 # Pretty Cool Elements
 
+<sup>**Social Media Photo by [Jamison McAndie](https://unsplash.com/@jamomca) on [Unsplash](https://unsplash.com/)**</sup>
+
+
 This module is a follow up of [this Medium post](https://webreflection.medium.com/about-web-components-cc3e8b4035b0), and it provides element mixins/behaviors, through class names, without names clashing.
 
 ```js
