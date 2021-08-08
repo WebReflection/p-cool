@@ -13,7 +13,7 @@ This module is a follow up of [this Medium post](https://webreflection.medium.co
     * multiple mixins/behaviors attached/detached at any time
     * native Custom Elements builtin callbacks, associated to mixins/behaviors
   * it's **S**erver **S**ide **R**endering compatible out of the box
-  * it uses all the DOM primitives without needing an extra attribute
+  * it uses all the DOM primitives without needing an extra attribute (bloat-free layouts)
   * it's semantically bound with element's view (their classes and their dedicated style)
   * it's graceful enchancement out of the box, based on builtin extends
   * it provides a robust polyfilled version through [vanilla-elements](https://github.com/WebReflection/vanilla-elements#readme)
