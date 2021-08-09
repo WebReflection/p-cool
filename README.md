@@ -52,7 +52,7 @@ define('my-div', {
 
 With native Custom Elements, we need to reserve a single name in a shared global registry to pass through the upgrade, and callbacks, mechanism.
 
-With `p-cool` elements, the registry is pre-populated with [vanilla-elements](https://github.com/WebReflection/vanilla-elements#readme) extends through a `p-cool-*` prefix, so that `<div is="p-cool-div">`, and `<p is="p-cool-p">`, or `<main is="p-cool-main">` are all valide, already registered, builtin extends, that brings mixins/behaviors to any element, and through their class name, as long as one, or mixin, is defined/attached, through the `define(name, mixin)` module's export.
+With `p-cool` elements, the registry is pre-populated with [vanilla-elements](https://github.com/WebReflection/vanilla-elements#readme) extends through a `p-cool-*` prefix, so that `<div is="p-cool-div">`, and `<p is="p-cool-p">`, or `<main is="p-cool-main">` are all valid, already registered, builtin extends, that brings mixins/behaviors to any element, and through their class name, as long as one, or mixin, is defined/attached, through the `define(name, mixin)` module's export.
 
 ```html
 <!doctype html>
@@ -138,9 +138,9 @@ Both values are `null` if there was not attribute, or if the attribute got remov
   <summary><strong>connectedCallback</strong></summary>
   <div>
 
-This callback is granted to be invoked *after* an element gets a new mixin/behavior, and every other time the element gets moved or re-appended on the DOM, exactly like it is for native *Custom Elements*.
+This callback is granted to be invoked *after* an element gets a new mixin/behavior, if the element is already live, and every other time the element gets moved or re-appended on the DOM, exactly like it is for native *Custom Elements*.
 
-Please not that when a mixin/behavior is attached, and there are observed attributes, this callback will be invoked *after* `attributeChangedCallback`.
+Please note that when a mixin/behavior is attached, and there are observed attributes, this callback will be invoked *after* `attributeChangedCallback`.
 
   </div>
 </details>
