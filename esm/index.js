@@ -2,15 +2,17 @@ import {define as $define, EXTENDS, HTML} from 'vanilla-elements';
 import {define as _define, behaviors, ATTRIBUTE_CHANGED_CALLBACK} from './behaviors.js';
 
 const classes = new Set;
-for (const key in HTML) {
-  const Class = HTML[key];
-  let name = 'p-cool';
-  if (EXTENDS in Class)
-    name += '-' + Class[EXTENDS].toLowerCase();
-  if (!classes.has(name)) {
-    classes.add(name);
-    try { $define(name, behaviors(Class)); }
-    catch (o_O) {}
+for (const key of Object.getOwnPropertyNames(self)) {
+  if (/^HTML(.*?)Element$/.test(key)) {
+    const Class = HTML[RegExp.$1 || 'Element'];
+    let name = 'p-cool';
+    if (EXTENDS in Class)
+      name += '-' + Class[EXTENDS].toLowerCase();
+    if (!classes.has(name)) {
+      classes.add(name);
+      try { $define(name, behaviors(Class)); }
+      catch (o_O) {}
+    }
   }
 }
 
